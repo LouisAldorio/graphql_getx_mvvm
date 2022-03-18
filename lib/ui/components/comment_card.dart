@@ -49,7 +49,7 @@ class CommentCard extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      "${comment.author.name}",
+                      comment.author.name,
                       style: TextStyle(
                         fontSize: 16,
                       ),

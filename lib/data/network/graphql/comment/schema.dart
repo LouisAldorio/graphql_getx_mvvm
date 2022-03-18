@@ -1,4 +1,4 @@
-String getComments = """
+String getCommentsQuery = """
   query getComments(\$page: Int!, \$limit: Int!) {
     comments(pagination: {
       limit: \$limit
@@ -18,6 +18,33 @@ String getComments = """
           id
           name
         }
+      }
+    }
+  }
+""";
+
+String createCommentMutation = """
+  mutation createComment(
+    \$postId: Int!,
+    \$userId: Int!,
+    \$body: String
+  ) {
+    addComment(
+      data: {
+        postId: \$postId
+        userId: \$userId
+        body: \$body
+      }
+    ){
+      id
+      body
+      post {
+        id
+        title
+      }
+      author{
+        id
+        name
       }
     }
   }

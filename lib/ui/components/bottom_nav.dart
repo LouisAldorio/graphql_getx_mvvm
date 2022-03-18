@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:graphql_getx_mvvm/store/global.dart';
+import 'package:graphql_getx_mvvm/controller/main.dart';
+import 'package:graphql_getx_mvvm/data/local/store/global.dart';
 
-class CustomBottomNavigation extends StatelessWidget {
+class CustomBottomNavigation extends GetView<MainController> {
   const CustomBottomNavigation({Key? key}) : super(key: key);
 
   @override
@@ -30,13 +31,15 @@ class CustomBottomNavigation extends StatelessWidget {
             label: '',
           ),
         ],
-        currentIndex: gState.bottomNavigationIndex.toInt(),
+        // currentIndex: gState.bottomNavigationIndex.toInt(),
+        currentIndex: controller.currentIndex.value,
         selectedItemColor: Colors.green,
         unselectedItemColor: Colors.grey,
         showUnselectedLabels: true,
-        onTap: (index) {
-          gState.mutateBottomNavigationIndex(index);
-        },
+        // onTap: (index) {
+        //   gState.mutateBottomNavigationIndex(index);
+        // },
+        onTap: controller.changePage,
       ),
     );
   }

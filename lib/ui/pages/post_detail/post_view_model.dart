@@ -5,6 +5,8 @@ import 'package:graphql_getx_mvvm/ui/pages/post_detail/post_repository.dart';
 
 class PostViewModel extends GetxController {
 
+  static PostViewModel get to => Get.find();
+
   var isLoading = false.obs;
 
   var result = Resource<Post>(

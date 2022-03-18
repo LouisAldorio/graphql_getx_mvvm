@@ -4,20 +4,20 @@ import 'package:get/get.dart';
 import 'package:graphql_getx_mvvm/ui/components/post_card.dart';
 import 'package:graphql_getx_mvvm/ui/pages/posts/posts_view_model.dart';
 
-class Posts extends StatelessWidget {
+class Posts extends GetView<PostsViewModel> {
   Posts({Key? key}) : super(key: key);
 
   final int limit = 5;
   int page = 1;
   final ScrollController scrollController = ScrollController();
-  final PostsViewModel viewModel = Get.put(PostsViewModel());
+  // final PostsViewModel controller = Get.put(PostsViewModel());
+
 
   @override
   Widget build(BuildContext context) {
-
     return Obx(
       () => Container(
-        child: viewModel.isLoading.value && viewModel.result.value.data!.isEmpty
+        child: controller.isLoading.value && controller.result.value.data!.isEmpty
             ? Center(
                 child: SpinKitWave(
                   color: Colors.green,
@@ -28,15 +28,15 @@ class Posts extends StatelessWidget {
                 child: Builder(
                     builder: (context) => ListView.builder(
                         itemCount: page <
-                                viewModel.result.value.metadata!.totalPages!
+                            controller.result.value.metadata!.totalPages!
                                     .toInt()
-                            ? viewModel.result.value.data!.length + 1
-                            : viewModel.result.value.data!.length,
+                            ? controller.result.value.data!.length + 1
+                            : controller.result.value.data!.length,
                         controller: scrollController,
                         itemBuilder: (context, index) {
-                          if (index == viewModel.result.value.data!.length &&
+                          if (index == controller.result.value.data!.length &&
                               page <=
-                                  viewModel.result.value.metadata!.totalPages!
+                                  controller.result.value.metadata!.totalPages!
                                       .toInt()) {
                             return Center(
                               child: Container(
@@ -50,7 +50,7 @@ class Posts extends StatelessWidget {
                           }
 
                           // Show your info
-                          final post = viewModel.result.value.data![index];
+                          final post = controller.result.value.data![index];
 
                           return PostCard(
                             id: post.id,
@@ -63,15 +63,16 @@ class Posts extends StatelessWidget {
                   if (t is ScrollEndNotification &&
                       scrollController.position.pixels >=
                           scrollController.position.maxScrollExtent * 0.8 &&
-                      !viewModel.isLoading.value &&
+                      !controller.isLoading.value &&
                       page <
-                          viewModel.result.value.metadata!.totalPages!
+                          controller.result.value.metadata!.totalPages!
                               .toInt()) {
                     page += 1;
-                    viewModel.getPosts(page, limit);
+                    controller.getPosts(page, limit);
                   }
                   return true;
-                }),
+                },
+              ),
       ),
     );
   }

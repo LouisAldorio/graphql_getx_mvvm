@@ -1,23 +1,23 @@
 import 'package:get/get.dart';
-import 'package:graphql_getx_mvvm/data/model/post.dart';
+import 'package:graphql_getx_mvvm/data/model/comment.dart';
 import 'package:graphql_getx_mvvm/data/model/resource.dart';
-import 'package:graphql_getx_mvvm/ui/pages/posts/posts_repository.dart';
+import 'package:graphql_getx_mvvm/ui/pages/comments/comments_repository.dart';
 
-class PostsViewModel extends GetxController {
+class CommentsViewModel extends GetxController {
 
-  static PostsViewModel get to => Get.find();
+  static CommentsViewModel get to => Get.find();
 
   var isLoading = false.obs;
 
-  var result = Resource<List<Post>>(
+  var result = Resource<List<Comment>>(
     data: [],
     metadata: null,
     error: null,
   ).obs;
 
-  void getPosts(int page, int limit) {
+  void getComments(int page, int limit) {
     isLoading.value = true;
-    PostsRepository().getPosts(page, limit).then((value) {
+    CommentsRepository().getComments(page, limit).then((value) {
       isLoading.value = false;
       result.value.metadata = value.metadata;
       result.value.error = value.error;
@@ -27,12 +27,12 @@ class PostsViewModel extends GetxController {
 
   @override
   void onInit() {
-    getPosts(1,5);
+    getComments(1,5);
     super.onInit();
   }
 
   void clear() {
-    result = Resource<List<Post>>(
+    result = Resource<List<Comment>>(
       data: [],
       metadata: null,
       error: null,

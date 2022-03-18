@@ -22,7 +22,7 @@ class GraphQLConfig {
     ValueNotifier<GraphQLClient> client = ValueNotifier(
       GraphQLClient(
         link: link,
-        // The default store is the InMemoryStore, which does NOT persist to disk
+        // The default data.local.store is the InMemoryStore, which does NOT persist to disk
         cache: GraphQLCache(
           store: InMemoryStore(),
         ),
