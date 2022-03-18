@@ -5,6 +5,8 @@ import 'package:graphql_getx_mvvm/data/model/resource.dart';
 import 'package:graphql_getx_mvvm/data/network/graphql/post/schema.dart';
 
 class PostServices {
+
+  // get post in list
   Future<Resource<List<Post>>> getPosts(int page, int limit) async {
     List<Post> posts = [];
 
@@ -41,5 +43,38 @@ class PostServices {
       ));
     }
     return Resource(data: posts, error: null, metadata: null);
+  }
+
+  // get post by id
+  Future<Resource<Post>> getPost(String id) async {
+    Post? post;
+
+    GraphQLConfig graphQLConfiguration = GraphQLConfig();
+    GraphQLClient _client = graphQLConfiguration.clientToQuery();
+    QueryResult result = await _client.query(
+      QueryOptions(
+        document: gql(getPostDetailQuery),
+        variables: {
+          "id": id,
+        },
+      ),
+    );
+
+    if (result.hasException) {
+      return Resource(
+        data: post,
+        metadata: null,
+        error: Error(
+            message: result.exception?.graphqlErrors[0].message,
+            extensions: result.exception?.graphqlErrors[0].extensions
+        ),
+      );
+    } else if (result.data != null && !result.isLoading) {
+
+      post = Post.fromJson(result.data!["post"]);
+
+      return Resource(data: post, error: null, metadata: null);
+    }
+    return Resource(data: post, error: null, metadata: null);
   }
 }

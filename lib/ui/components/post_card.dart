@@ -31,8 +31,9 @@ class PostCard extends StatelessWidget {
         child: InkWell(
           splashColor: Colors.green.withAlpha(30),
           onTap: () {
-            // Navigator.pushNamed(context,"/post-detail", arguments: PostArgument(id: id));
-            Get.toNamed("/post-detail", arguments: 'Get is the best');
+            Get.toNamed("/post-detail", arguments: {
+              "id": id
+            });
           },
           child: Column(
             children: <Widget>[
