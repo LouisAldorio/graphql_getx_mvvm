@@ -24,7 +24,7 @@ class GraphQLConfig {
         link: link,
         // The default store is the InMemoryStore, which does NOT persist to disk
         cache: GraphQLCache(
-          store: HiveStore(),
+          store: InMemoryStore(),
         ),
       ),
     );
@@ -40,7 +40,7 @@ class GraphQLConfig {
     final Link link = authLink.concat(httpLink);
     return GraphQLClient(
       cache: GraphQLCache(
-        store: HiveStore(),
+        store: InMemoryStore(),
       ),
       link: link,
     );

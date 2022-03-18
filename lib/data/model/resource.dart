@@ -1,19 +1,26 @@
 class Resource<T> {
-  bool? isLoading;
   T? data;
   Error? error;
+  Metadata? metadata;
 
   Resource({
-    this.isLoading,
     this.data,
     this.error,
+    this.metadata
   });
 }
 
-class Error<T> {
+class Error {
   String? message;
-  String? code;
-  T? data;
+  Map<String, dynamic>? extensions;
 
-  Error({this.message, this.data, this.code});
+  Error({this.message, this.extensions});
+}
+
+class Metadata {
+  int? total;
+  int? currentPage;
+  int? totalPages;
+
+  Metadata({this.currentPage, this.total, this.totalPages});
 }

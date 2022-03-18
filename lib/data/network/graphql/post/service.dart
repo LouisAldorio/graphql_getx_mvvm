@@ -21,25 +21,25 @@ class PostServices {
     );
 
     if (result.hasException) {
-      print(result.exception?.graphqlErrors[0].message);
       return Resource(
         data: posts,
-        isLoading: false,
+        metadata: null,
         error: Error(
           message: result.exception?.graphqlErrors[0].message,
-          data: posts,
+          extensions: result.exception?.graphqlErrors[0].extensions
         ),
       );
-    } else if (result.data != null) {
+    } else if (result.data != null && !result.isLoading) {
       posts = result.data!["posts"]["data"]
           .map<Post>((dynamic item) => Post.fromJson(item))
           .toList();
 
-      return Resource(data: posts, isLoading: false, error: null);
-    } else if(result.isLoading) {
-      return Resource(data: posts, isLoading: result.isLoading, error: null); 
+      return Resource(data: posts, error: null, metadata: Metadata(
+        currentPage: result.data!["posts"]["currentPage"],
+        total: result.data!["posts"]["count"],
+        totalPages: result.data!["posts"]["totalPages"]
+      ));
     }
-
-    return Resource(data: posts, isLoading: result.isLoading, error: null); 
+    return Resource(data: posts, error: null, metadata: null);
   }
 }

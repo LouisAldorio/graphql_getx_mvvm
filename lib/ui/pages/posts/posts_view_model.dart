@@ -4,29 +4,28 @@ import 'package:graphql_getx_mvvm/data/model/resource.dart';
 import 'package:graphql_getx_mvvm/ui/pages/posts/posts_repository.dart';
 
 class PostsViewModel extends GetxController {
-  int page = 1;
-  int limit = 10;
-
-  PostsViewModel({ required this.page, required this.limit });
 
   var isLoading = false.obs;
 
   var result = Resource<List<Post>>(
     data: [],
+    metadata: null,
     error: null,
   ).obs;
 
-  getPosts(int page, int limit) {
+  void getPosts(int page, int limit) {
     isLoading.value = true;
     PostsRepository().getPosts(page, limit).then((value) {
       isLoading.value = false;
-      result.value = value;
+      result.value.metadata = value.metadata;
+      result.value.error = value.error;
+      result.value.data?.addAll(value.data!.map((e) => e));
     });
   }
-  
+
   @override
   void onInit() {
-    getPosts(page, limit);
+    getPosts(1, 5);
     super.onInit();
   }
 }
