@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 import 'package:flutter_share/flutter_share.dart';
 import 'package:get/get.dart';
+import 'package:graphql_getx_mvvm/constant/router.dart';
 
 class PostCard extends StatelessWidget {
   final String title;
@@ -27,46 +28,45 @@ class PostCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-        clipBehavior: Clip.antiAlias,
-        child: InkWell(
-          splashColor: Colors.green.withAlpha(30),
-          onTap: () {
-            Get.toNamed("/post-detail", arguments: {
-              "id": id
-            });
-          },
-          child: Column(
-            children: <Widget>[
-              ListTile(
-                leading: Hero(
-                  tag: "card_thumbnail$id",
-                  child: CircleAvatar(
-                    backgroundImage: NetworkImage(
-                        "https://source.unsplash.com/random/300x300/?girl"),
-                  ),
-                ),
-                title: Text("$id $title"),
-                subtitle: Text("Posted by $author"),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Text(
-                  body,
-                  style: TextStyle(color: Colors.black.withOpacity(0.6)),
+      clipBehavior: Clip.antiAlias,
+      child: InkWell(
+        splashColor: Colors.green.withAlpha(30),
+        onTap: () {
+          Get.toNamed(RouterConst.POST_DETAIL_ROUTE, arguments: {"id": id});
+        },
+        child: Column(
+          children: <Widget>[
+            ListTile(
+              leading: Hero(
+                tag: "card_thumbnail$id",
+                child: CircleAvatar(
+                  backgroundImage: NetworkImage(
+                      "https://source.unsplash.com/random/300x300/?girl"),
                 ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: <Widget>[
-                  TextButton(
-                    child: const Text('Share'),
-                    onPressed: share,
-                  ),
-                  const SizedBox(width: 8),
-                ],
+              title: Text("$id $title"),
+              subtitle: Text("Posted by $author"),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Text(
+                body,
+                style: TextStyle(color: Colors.black.withOpacity(0.6)),
               ),
-            ],
-          ),
-        ));
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: <Widget>[
+                TextButton(
+                  child: const Text('Share'),
+                  onPressed: share,
+                ),
+                const SizedBox(width: 8),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

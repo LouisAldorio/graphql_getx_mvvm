@@ -5,10 +5,15 @@ import 'package:graphql_getx_mvvm/ui/pages/posts/posts_repository.dart';
 
 class PostsViewModel extends GetxController {
 
+  // find the viewModel in memory
   static PostsViewModel get to => Get.find();
 
-  var isLoading = false.obs;
+  // non Observable variable
+  final int limit = 5;
 
+  // observable variable
+  var page = 1.obs;
+  var isLoading = false.obs;
   var result = Resource<List<Post>>(
     data: [],
     metadata: null,
@@ -27,15 +32,12 @@ class PostsViewModel extends GetxController {
 
   @override
   void onInit() {
-    getPosts(1,5);
+    getPosts(page.value,limit);
     super.onInit();
   }
 
-  void clear() {
-    result = Resource<List<Post>>(
-      data: [],
-      metadata: null,
-      error: null,
-    ).obs;
+  void loadNextPage() {
+    page += 1;
+    getPosts(page.value,limit);
   }
 }

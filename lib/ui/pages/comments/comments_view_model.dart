@@ -5,10 +5,15 @@ import 'package:graphql_getx_mvvm/ui/pages/comments/comments_repository.dart';
 
 class CommentsViewModel extends GetxController {
 
+  // find injected viewModel
   static CommentsViewModel get to => Get.find();
 
-  var isLoading = false.obs;
+  // non Observable variable
+  final int limit = 5;
 
+  // observable variable
+  var page = 1.obs;
+  var isLoading = false.obs;
   var result = Resource<List<Comment>>(
     data: [],
     metadata: null,
@@ -27,15 +32,12 @@ class CommentsViewModel extends GetxController {
 
   @override
   void onInit() {
-    getComments(1,5);
+    getComments(page.value, limit);
     super.onInit();
   }
 
-  void clear() {
-    result = Resource<List<Comment>>(
-      data: [],
-      metadata: null,
-      error: null,
-    ).obs;
+  void loadNextPage() {
+    page += 1;
+    getComments(page.value,limit);
   }
 }

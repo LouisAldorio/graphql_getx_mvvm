@@ -8,14 +8,11 @@ import 'package:intl/intl.dart' show toBeginningOfSentenceCase;
 import 'package:latlong2/latlong.dart';
 import 'package:flutter_map/flutter_map.dart';
 
-class PostDetail extends StatelessWidget {
-  PostDetail({Key? key}) : super(key: key);
-
-  final PostViewModel viewModel = Get.put(PostViewModel());
+class PostDetail extends GetView<PostViewModel> {
+  const PostDetail({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    viewModel.getPost(Get.arguments["id"]);
 
     return Scaffold(
         extendBodyBehindAppBar: true,
@@ -40,11 +37,11 @@ class PostDetail extends StatelessWidget {
                         fit: BoxFit.cover,
                       )),
                   Obx(() {
-                    final post = viewModel.result.value.data;
+                    final post = controller.result.value.data;
 
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: viewModel.isLoading.value
+                      child: controller.isLoading.value
                           ? Center(
                               heightFactor: 4,
                               child: SpinKitWave(

@@ -7,14 +7,11 @@ import 'package:graphql_getx_mvvm/ui/pages/posts/posts_view_model.dart';
 class Posts extends GetView<PostsViewModel> {
   Posts({Key? key}) : super(key: key);
 
-  final int limit = 5;
-  int page = 1;
   final ScrollController scrollController = ScrollController();
-  // final PostsViewModel controller = Get.put(PostsViewModel());
-
 
   @override
   Widget build(BuildContext context) {
+
     return Obx(
       () => Container(
         child: controller.isLoading.value && controller.result.value.data!.isEmpty
@@ -27,7 +24,7 @@ class Posts extends GetView<PostsViewModel> {
             : NotificationListener(
                 child: Builder(
                     builder: (context) => ListView.builder(
-                        itemCount: page <
+                        itemCount: controller.page.value <
                             controller.result.value.metadata!.totalPages!
                                     .toInt()
                             ? controller.result.value.data!.length + 1
@@ -35,7 +32,7 @@ class Posts extends GetView<PostsViewModel> {
                         controller: scrollController,
                         itemBuilder: (context, index) {
                           if (index == controller.result.value.data!.length &&
-                              page <=
+                              controller.page.value <=
                                   controller.result.value.metadata!.totalPages!
                                       .toInt()) {
                             return Center(
@@ -64,11 +61,11 @@ class Posts extends GetView<PostsViewModel> {
                       scrollController.position.pixels >=
                           scrollController.position.maxScrollExtent * 0.8 &&
                       !controller.isLoading.value &&
-                      page <
+                      controller.page.value <
                           controller.result.value.metadata!.totalPages!
                               .toInt()) {
-                    page += 1;
-                    controller.getPosts(page, limit);
+
+                    controller.loadNextPage();
                   }
                   return true;
                 },
