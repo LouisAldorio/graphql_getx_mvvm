@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:graphql_getx_mvvm/ui/pages/create_post/create_post_page.dart';
 
 class CustomFloatingActionButton extends StatelessWidget {
   const CustomFloatingActionButton({Key? key}) : super(key: key);
@@ -13,7 +15,9 @@ class CustomFloatingActionButton extends StatelessWidget {
         child: FloatingActionButton(
           backgroundColor: Colors.transparent,
           elevation: 0,
-          onPressed: () {},
+          onPressed: () {
+            Get.toNamed("/create-post");
+          },
           child: Container(
             height: 75,
             width: 75,

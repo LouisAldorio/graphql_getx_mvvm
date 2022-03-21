@@ -1,3 +1,21 @@
+String createPostMutation = """
+  mutation createPost(\$userId: Int!, \$title: String!, \$body: String!) {
+    addPost(data: {
+      userId: \$userId
+      title: \$title
+      body: \$body
+    }) {
+      id
+      title
+      body
+      author {
+        id
+        name
+      }
+    }
+  }
+""";
+
 String getPostsQuery = """
   query getPosts(\$page: Int!, \$limit: Int!) {
     posts(pagination: {

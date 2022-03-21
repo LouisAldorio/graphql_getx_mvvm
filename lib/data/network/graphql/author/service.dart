@@ -7,7 +7,7 @@ import 'package:graphql_getx_mvvm/data/network/graphql/author/schema.dart';
 
 class AuthorServices {
   // create new comment
-  Future<Resource<List<Author>>> getAuthors(int page, int limit) async {
+  Future<Resource<List<Author>>> getAuthors(int? page, int? limit) async {
     List<Author> authors = [];
 
     GraphQLConfig graphQLConfiguration = GraphQLConfig();

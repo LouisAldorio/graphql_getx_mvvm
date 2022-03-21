@@ -53,12 +53,11 @@ class AuthorCard extends StatelessWidget {
                   ],
                 ),
               ),
-              Text(
+              author.email != null ? Text(
                 author.email!,
-                style: TextStyle(
-                    fontSize: 14, color: Theme.of(context).disabledColor),
+                style: TextStyle(fontSize: 14),
                 textAlign: TextAlign.left,
-              ),
+              ) : Container(),
             ],
           ),
         ));

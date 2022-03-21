@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:graphql_getx_mvvm/binding/home.dart';
 import 'package:graphql_getx_mvvm/binding/post.dart';
-import "package:graphql_getx_mvvm/data/network/graphql/client.dart";
 import 'package:flutter/services.dart';
 import 'package:graphql_getx_mvvm/ui/pages/home/home_page.dart';
 import 'package:graphql_getx_mvvm/ui/pages/post_detail/post_detail_page.dart';
+import 'package:graphql_getx_mvvm/ui/pages/create_post/create_post_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,7 +22,6 @@ class Root extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return GetMaterialApp(
       initialRoute: "/home",
       defaultTransition: Transition.zoom,
@@ -34,9 +32,16 @@ class Root extends StatelessWidget {
           binding: HomeBinding(),
         ),
         GetPage(
-            name: "/post-detail",
-            page: () => PostDetail(),
-            binding: PostBinding())
+          name: "/post-detail",
+          page: () => PostDetail(),
+          binding: PostBinding(),
+        ),
+        GetPage(
+          name: "/create-post",
+          page: () => CreatePostForm(),
+          binding: CreatePostFormBinding(),
+          transition: Transition.cupertino
+        )
       ],
       theme: ThemeData(
         scaffoldBackgroundColor: Color(0xFFF9F8FD),

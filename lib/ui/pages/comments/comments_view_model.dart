@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:graphql_getx_mvvm/data/model/comment.dart';
 import 'package:graphql_getx_mvvm/data/model/resource.dart';
-import 'package:graphql_getx_mvvm/ui/pages/comments/comments_repository.dart';
+import 'package:graphql_getx_mvvm/repository/comment.dart';
 
 class CommentsViewModel extends GetxController {
 

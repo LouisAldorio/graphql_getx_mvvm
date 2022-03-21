@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:graphql_getx_mvvm/data/model/author.dart';
 import 'package:graphql_getx_mvvm/data/model/resource.dart';
-import 'package:graphql_getx_mvvm/ui/pages/authors/authors_repository.dart';
+import 'package:graphql_getx_mvvm/repository/author.dart';
 
 class AuthorsViewModel extends GetxController {
 

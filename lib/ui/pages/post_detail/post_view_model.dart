@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:graphql_getx_mvvm/data/model/post.dart';
 import 'package:graphql_getx_mvvm/data/model/resource.dart';
-import 'package:graphql_getx_mvvm/ui/pages/post_detail/post_repository.dart';
+import 'package:graphql_getx_mvvm/repository/post.dart';
 
 class PostViewModel extends GetxController {
 

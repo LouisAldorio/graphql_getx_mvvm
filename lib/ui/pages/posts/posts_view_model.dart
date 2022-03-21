@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:graphql_getx_mvvm/data/model/post.dart';
 import 'package:graphql_getx_mvvm/data/model/resource.dart';
-import 'package:graphql_getx_mvvm/ui/pages/posts/posts_repository.dart';
+import 'package:graphql_getx_mvvm/repository/post.dart';
 
 class PostsViewModel extends GetxController {
   // find the viewModel in memory
@@ -21,7 +21,7 @@ class PostsViewModel extends GetxController {
 
   void getPosts(int page, int limit) {
     isLoading.value = true;
-    PostsRepository().getPosts(page, limit).then((value) {
+    PostRepository().getPosts(page, limit).then((value) {
       isLoading.value = false;
       result.value.metadata = value.metadata;
       result.value.error = value.error;
