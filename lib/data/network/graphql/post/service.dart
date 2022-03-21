@@ -11,7 +11,7 @@ class PostServices {
     List<Post> posts = [];
 
     GraphQLConfig graphQLConfiguration = GraphQLConfig();
-    GraphQLClient _client = graphQLConfiguration.clientToQuery();
+    GraphQLClient _client = graphQLConfiguration.getClient();
     QueryResult result = await _client.query(
       QueryOptions(
         document: gql(getPostsQuery),
@@ -50,7 +50,7 @@ class PostServices {
     Post? post;
 
     GraphQLConfig graphQLConfiguration = GraphQLConfig();
-    GraphQLClient _client = graphQLConfiguration.clientToQuery();
+    GraphQLClient _client = graphQLConfiguration.getClient();
     QueryResult result = await _client.query(
       QueryOptions(
         document: gql(getPostDetailQuery),

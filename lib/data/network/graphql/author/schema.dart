@@ -1,4 +1,4 @@
-String getAuthors = """
+String getAuthorsQuery = """
   query getUsers(\$page: Int, \$limit: Int) {
     users(pagination: {
       limit: \$limit

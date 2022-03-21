@@ -11,10 +11,10 @@ class Posts extends GetView<PostsViewModel> {
 
   @override
   Widget build(BuildContext context) {
-
     return Obx(
       () => Container(
-        child: controller.isLoading.value && controller.result.value.data!.isEmpty
+        child: controller.isLoading.value &&
+                controller.result.value.data!.isEmpty
             ? Center(
                 child: SpinKitWave(
                   color: Colors.green,
@@ -25,7 +25,7 @@ class Posts extends GetView<PostsViewModel> {
                 child: Builder(
                     builder: (context) => ListView.builder(
                         itemCount: controller.page.value <
-                            controller.result.value.metadata!.totalPages!
+                                controller.result.value.metadata!.totalPages!
                                     .toInt()
                             ? controller.result.value.data!.length + 1
                             : controller.result.value.data!.length,
@@ -64,7 +64,6 @@ class Posts extends GetView<PostsViewModel> {
                       controller.page.value <
                           controller.result.value.metadata!.totalPages!
                               .toInt()) {
-
                     controller.loadNextPage();
                   }
                   return true;

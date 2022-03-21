@@ -10,8 +10,9 @@ class CommentServices {
   Future<Resource<List<Comment>>> getComments(int page, int limit) async {
     List<Comment> comments = [];
 
+
     GraphQLConfig graphQLConfiguration = GraphQLConfig();
-    GraphQLClient _client = graphQLConfiguration.clientToQuery();
+    GraphQLClient _client = graphQLConfiguration.getClient();
     QueryResult result = await _client.query(
       QueryOptions(
         document: gql(getCommentsQuery),

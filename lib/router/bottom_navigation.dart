@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:graphql_getx_mvvm/binding/author.dart';
 import 'package:graphql_getx_mvvm/binding/comment.dart';
 import 'package:graphql_getx_mvvm/binding/post.dart';
 import 'package:graphql_getx_mvvm/constant/router.dart';
@@ -26,8 +27,6 @@ class BottomNavigationRouter extends GetxController {
   }
 
   Route? onGenerateRoute(RouteSettings settings) {
-    print(settings.name);
-
     if (settings.name == RouterConst.POSTS_ROUTE) {
       return GetPageRoute(
         settings: settings,
@@ -49,7 +48,7 @@ class BottomNavigationRouter extends GetxController {
       return GetPageRoute(
         settings: settings,
         page: () => Authors(),
-        // binding: SettingsBinding(),
+        binding: AuthorsBinding(),
       );
     }
 

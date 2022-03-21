@@ -9,7 +9,6 @@ import 'package:graphql_getx_mvvm/ui/pages/home/home_page.dart';
 import 'package:graphql_getx_mvvm/ui/pages/post_detail/post_detail_page.dart';
 
 Future<void> main() async {
-  // required for testing purpose
   WidgetsFlutterBinding.ensureInitialized();
 
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -24,37 +23,29 @@ class Root extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //GraphQLConfig init
-    ValueNotifier<GraphQLClient> client = GraphQLConfig.graphInit();
 
-    return GraphQLProvider(
-      client: client,
-      child: GetMaterialApp(
-        initialRoute: "/home",
-        defaultTransition: Transition.zoom,
-        getPages: [
-          GetPage(
-            name: '/home',
-            page: () => Home(),
-            binding: HomeBinding(),
-          ),
-          GetPage(
+    return GetMaterialApp(
+      initialRoute: "/home",
+      defaultTransition: Transition.zoom,
+      getPages: [
+        GetPage(
+          name: '/home',
+          page: () => Home(),
+          binding: HomeBinding(),
+        ),
+        GetPage(
             name: "/post-detail",
             page: () => PostDetail(),
-            binding: PostBinding()
-          )
-        ],
-        theme: ThemeData(
-          scaffoldBackgroundColor: Color(0xFFF9F8FD),
-          primarySwatch: Colors.green,
-          appBarTheme: AppBarTheme(color: Color(0xFF0C9869)),
-          typography: Typography.material2018(),
-          visualDensity: VisualDensity.adaptivePlatformDensity,
-        ),
-        title: 'Flutter Graphql GetX MVVM',
+            binding: PostBinding())
+      ],
+      theme: ThemeData(
+        scaffoldBackgroundColor: Color(0xFFF9F8FD),
+        primarySwatch: Colors.green,
+        appBarTheme: AppBarTheme(color: Color(0xFF0C9869)),
+        typography: Typography.material2018(),
+        visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
+      title: 'Flutter Graphql GetX MVVM',
     );
   }
 }
-
-
