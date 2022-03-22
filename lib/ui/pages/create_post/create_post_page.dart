@@ -117,17 +117,31 @@ class CreatePostForm extends GetView<CreatePostViewModel> {
                     onPressed: () {
                       if (controller.formKey.currentState != null &&
                           controller.formKey.currentState!.validate()) {
-                        controller.onSubmit().then((value) {
-                          if(value.data != null) {
-                            Get.back();
-                          }else if(value.error != null) {
-                            Get.snackbar(
-                              "Error",
-                              value.error!.message!,
-                              backgroundColor: Colors.red,
-                            );
-                          }
-                        });
+                        if (controller.selectedAuthor.value != null) {
+                          controller.onSubmit().then(
+                            (value) {
+                              if (value.data != null) {
+                                Get.back();
+
+                                Get.snackbar("Post Created", "Successfully",
+                                    backgroundColor: Colors.green,
+                                    margin: EdgeInsets.all(8));
+                              } else if (value.error != null) {
+                                Get.snackbar(
+                                  "Error",
+                                  value.error!.message!,
+                                  backgroundColor: Colors.red,
+                                );
+                              }
+                            },
+                          );
+                        } else {
+                          Get.snackbar(
+                            "Error",
+                            "Please select an author",
+                            backgroundColor: Colors.red,
+                          );
+                        }
                       }
                     },
                     child: Text('Submit'),

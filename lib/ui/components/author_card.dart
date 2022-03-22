@@ -39,7 +39,7 @@ class AuthorCard extends StatelessWidget {
                         borderRadius: BorderRadius.circular(100),
                         image: DecorationImage(
                             image: NetworkImage(
-                                "https://source.unsplash.com/random/300x300/?fruit"),
+                                "https://source.unsplash.com/random/300x300/?girl"),
                             scale: 1.0,
                             fit: BoxFit.fill),
                       ),
@@ -53,11 +53,13 @@ class AuthorCard extends StatelessWidget {
                   ],
                 ),
               ),
-              author.email != null ? Text(
-                author.email!,
-                style: TextStyle(fontSize: 14),
-                textAlign: TextAlign.left,
-              ) : Container(),
+              author.email != null
+                  ? Text(
+                      author.email!,
+                      style: TextStyle(fontSize: 14),
+                      textAlign: TextAlign.left,
+                    )
+                  : Container(),
             ],
           ),
         ));
