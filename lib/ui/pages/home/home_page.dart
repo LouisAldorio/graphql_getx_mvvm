@@ -10,7 +10,6 @@ class Home extends GetView<BottomNavigationRouter> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       body: Navigator(
         key: Get.nestedKey(RouterConst.BOTTOM_NAVIGATION_KEY),
@@ -19,7 +18,7 @@ class Home extends GetView<BottomNavigationRouter> {
       ),
       bottomNavigationBar: CustomBottomNavigation(),
       floatingActionButton: CustomFloatingActionButton(),
-      floatingActionButtonLocation: FloatingActionButtonLocation.miniEndDocked,
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
   }
 }

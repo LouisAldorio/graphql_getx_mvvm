@@ -7,9 +7,8 @@ class CustomBottomNavigation extends GetView<BottomNavigationRouter> {
 
   @override
   Widget build(BuildContext context) {
-
     return Obx(
-          () => BottomNavigationBar(
+      () => BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         items: const [
           BottomNavigationBarItem(
@@ -24,10 +23,6 @@ class CustomBottomNavigation extends GetView<BottomNavigationRouter> {
             icon: Icon(Icons.perm_identity),
             label: 'Author',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.more_horiz),
-            label: '',
-          ),
         ],
         currentIndex: controller.currentIndex.value,
         selectedItemColor: Colors.green,
@@ -38,5 +33,3 @@ class CustomBottomNavigation extends GetView<BottomNavigationRouter> {
     );
   }
 }
-
-
