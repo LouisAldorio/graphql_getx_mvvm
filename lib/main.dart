@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:graphql_getx_mvvm/binding/home.dart';
@@ -22,7 +23,12 @@ class Root extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
+    return GetCupertinoApp(
+      localizationsDelegates: [
+        DefaultMaterialLocalizations.delegate,
+        DefaultCupertinoLocalizations.delegate,
+        DefaultWidgetsLocalizations.delegate,
+      ],
       initialRoute: "/home",
       defaultTransition: Transition.zoom,
       getPages: [
@@ -37,18 +43,27 @@ class Root extends StatelessWidget {
           binding: PostBinding(),
         ),
         GetPage(
-          name: "/create-post",
-          page: () => CreatePostForm(),
-          binding: CreatePostFormBinding(),
-          transition: Transition.cupertino
-        )
+            name: "/create-post",
+            page: () => CreatePostForm(),
+            binding: CreatePostFormBinding(),
+            transition: Transition.cupertino)
       ],
-      theme: ThemeData(
+      // theme: ThemeData(
+      //   scaffoldBackgroundColor: Color(0xFFF9F8FD),
+      //   primarySwatch: Colors.green,
+      //   appBarTheme: AppBarTheme(color: Color(0xFF0C9869)),
+      //   typography: Typography.material2018(),
+      //   visualDensity: VisualDensity.adaptivePlatformDensity,
+      // ),
+      theme: CupertinoThemeData(
+        primaryColor: Color(0xFF0C9869),
         scaffoldBackgroundColor: Color(0xFFF9F8FD),
-        primarySwatch: Colors.green,
-        appBarTheme: AppBarTheme(color: Color(0xFF0C9869)),
-        typography: Typography.material2018(),
-        visualDensity: VisualDensity.adaptivePlatformDensity,
+        textTheme: CupertinoTextThemeData(
+          textStyle: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
       ),
       title: 'Flutter Graphql GetX MVVM',
     );
